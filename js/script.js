@@ -70,18 +70,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Brand Hybrid Scroll Animation (Auto + Manual Parallax)
 const brandsTrack = document.querySelector('.brands-track');
 if (brandsTrack) {
+    // Disable CSS animation to let JS handle it smoothly with parallax
+    brandsTrack.style.animation = 'none';
+
     let autoX = 0;
-    const autoSpeed = 0.5; // Pixels per frame
+    const autoSpeed = 0.8; // Pixels per frame
 
     function animateBrands() {
         autoX += autoSpeed;
 
         // Manual scroll influence (parallax)
-        const scrollInfluence = window.scrollY * 0.4;
+        const scrollInfluence = window.scrollY * 0.2;
 
         // Total movement
-        // Reset at 1500px (width of one set of 6 brands: 6 * 250px) to keep it infinite
-        const totalX = (autoX + scrollInfluence) % 1500;
+        // Reset point: 25 brands * 280px (200px width + 80px gap) = 7000px
+        const totalX = (autoX + scrollInfluence) % 7000;
 
         brandsTrack.style.transform = `translateX(-${totalX}px)`;
 
